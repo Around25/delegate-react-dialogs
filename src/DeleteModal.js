@@ -11,11 +11,11 @@ import {
 import React from "react";
 
 const DeleteModal = ({ isOpen, onClose, onConfirmDelete }) => (
-  <Modal isOpen={isOpen}>
+  <Modal isOpen={isOpen} onClose={onClose}>
     <ModalOverlay />
     <ModalContent>
       <ModalHeader>Are you sure?</ModalHeader>
-      <ModalCloseButton />
+      <ModalCloseButton/>
       <ModalBody>
         Deleting this resource is an irreversible action. Are you sure you want
         to proceed?

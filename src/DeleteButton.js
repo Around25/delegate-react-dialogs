@@ -1,20 +1,19 @@
-import { Button, useDisclosure } from "@chakra-ui/react";
+import { Button } from "@chakra-ui/react";
 import React from "react";
-import DeleteModal from "./DeleteModal";
+import { useConfirmation } from "./ConfirmationModalContext";
 
 const DeleteButton = ({ onConfirmDelete }) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { ask } = useConfirmation();
 
-  return (
-    <>
-      <Button onClick={onOpen}>Delete</Button>
-      <DeleteModal
-        onConfirmDelete={onConfirmDelete}
-        isOpen={isOpen}
-        onClose={onClose}
-      />
-    </>
-  );
+  const handleClick = async () => {
+    const confirmed = await ask();
+
+    if (confirmed) {
+      onConfirmDelete();
+    }
+  }
+
+  return <Button onClick={handleClick}>Delete</Button>;
 };
 
 export default DeleteButton;
